@@ -11,6 +11,9 @@
 		"AzureSqlDatabaseLS_connectionString": {
 			"value": ""
 		},
+		"BlobToSQLEventTrigger_properties_typeProperties_scope": {
+			"value": "/subscriptions/f5473a3d-e5ab-412e-a58f-af41e5161d05/resourceGroups/ADF_RG/providers/Microsoft.Storage/storageAccounts/bimalstorageacc"
+		},
 		"containerUri": {
 			"value": ""
 		},

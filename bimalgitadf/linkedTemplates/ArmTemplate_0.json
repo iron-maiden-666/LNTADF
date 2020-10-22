@@ -14,6 +14,10 @@
 		"AzureSqlDatabaseLS_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabaseLS'"
+		},
+		"BlobToSQLEventTrigger_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/f5473a3d-e5ab-412e-a58f-af41e5161d05/resourceGroups/ADF_RG/providers/Microsoft.Storage/storageAccounts/bimalstorageacc"
 		}
 	},
 	"variables": {
@@ -388,6 +392,37 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/AzureSqlSource')]",
 				"[concat(variables('factoryId'), '/datasets/DestinationDataset')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BlobToSQLEventTrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "CopyDataFromBlobToSQLPipeline",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/inputdata/blobs/",
+					"blobPathEndsWith": "*.csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('BlobToSQLEventTrigger_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/CopyDataFromBlobToSQLPipeline')]"
 			]
 		}
 	]
