@@ -27,10 +27,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"tableOption": {
-							"value": "dbo.books",
-							"type": "Expression"
-						},
+						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
