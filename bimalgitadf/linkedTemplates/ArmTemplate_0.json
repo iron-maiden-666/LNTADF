@@ -167,7 +167,7 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "Books.xlsx",
+						"fileName": "Books.csv",
 						"container": "inputdata"
 					},
 					"columnDelimiter": ",",
@@ -364,6 +364,22 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Wait for a second",
+						"type": "Wait",
+						"dependsOn": [
+							{
+								"activity": "Copy datafrom azure sql database to blob",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 1
+						}
 					}
 				],
 				"annotations": [],
