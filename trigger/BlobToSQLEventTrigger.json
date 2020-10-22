@@ -1,0 +1,25 @@
+{
+	"name": "BlobToSQLEventTrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "CopyDataFromBlobToSQLPipeline",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/inputdata/blobs/",
+			"blobPathEndsWith": "*.csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/f5473a3d-e5ab-412e-a58f-af41e5161d05/resourceGroups/ADF_RG/providers/Microsoft.Storage/storageAccounts/bimalstorageacc",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
